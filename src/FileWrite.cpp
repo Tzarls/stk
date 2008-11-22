@@ -23,6 +23,7 @@
 
 #include "FileWrite.h"
 #include <cmath>
+#include <cstring>
 
 const FileWrite::FILE_TYPE FileWrite :: FILE_RAW = 1;
 const FileWrite::FILE_TYPE FileWrite :: FILE_WAV = 2;

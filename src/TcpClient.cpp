@@ -24,6 +24,7 @@
 /***************************************************/
 
 #include "TcpClient.h"
+#include <cstring>
 
 TcpClient :: TcpClient(int port, std::string hostname )
 {

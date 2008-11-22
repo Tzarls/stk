@@ -24,6 +24,7 @@
 /***************************************************/
 
 #include "Skini.h"
+#include <cstdlib>
 #include "SKINI.tbl"
 
 Skini :: Skini()

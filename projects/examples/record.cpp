@@ -22,6 +22,7 @@
 */
 /******************************************/
 
+#include <cstdlib>
 #include "RtWvIn.h"
 #include "FileWvOut.h"
 

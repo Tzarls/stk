@@ -1,5 +1,6 @@
 // sineosc.cpp STK tutorial program
 
+#include <cstdlib>
 #include "WaveLoop.h"
 #include "FileWvOut.h"
 

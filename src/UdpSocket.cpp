@@ -22,6 +22,7 @@
 /***************************************************/
 
 #include "UdpSocket.h"
+#include <cstring>
 
 UdpSocket :: UdpSocket(int port )
 {

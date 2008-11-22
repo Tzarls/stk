@@ -16,6 +16,7 @@
 #include "FileWvIn.h"
 #include "RtAudio.h"
 
+#include <cstdlib>
 #include <signal.h>
 #include <iostream>
 

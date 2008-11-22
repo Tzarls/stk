@@ -28,6 +28,7 @@
 */
 /******************************************/
 
+#include <cstdlib>
 #include "InetWvIn.h"
 #include "RtWvOut.h"
 

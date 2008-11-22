@@ -17,6 +17,7 @@
 
 #include "MidiFileIn.h"
 #include <iostream>
+#include <cstring>
 
 MidiFileIn :: MidiFileIn( std::string fileName )
 {

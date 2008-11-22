@@ -51,6 +51,7 @@
 /***************************************************/
 
 #include "Stk.h"
+#include <cstdlib>
 
 StkFloat Stk :: srate_ = (StkFloat) SRATE;
 std::string Stk :: rawwavepath_ = RAWWAVE_PATH;

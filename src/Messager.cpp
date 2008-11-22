@@ -34,6 +34,7 @@
 
 #include "Messager.h"
 #include <iostream>
+#include <algorithm>
 #include "SKINI.msg"
 
 static const int STK_FILE   = 0x1;

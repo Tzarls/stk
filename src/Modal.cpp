@@ -12,6 +12,7 @@
 /***************************************************/
 
 #include "Modal.h"
+#include <cstdlib>
 
 Modal :: Modal(unsigned int modes)
   : nModes_(modes)

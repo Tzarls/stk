@@ -54,6 +54,8 @@
 
 #include "Stk.h"
 #include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 int my_random(int max) //  Return Random Int Between 0 and max
 {

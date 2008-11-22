@@ -12,6 +12,7 @@
 #include "Messager.h"
 #include "RtAudio.h"
 
+#include <cstring>
 #include <signal.h>
 #include <iostream>
 #include <algorithm>

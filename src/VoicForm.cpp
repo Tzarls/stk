@@ -30,6 +30,7 @@
 #include "SKINI.msg"
 
 #include <cmath>
+#include <cstring>
 
 VoicForm :: VoicForm() : Instrmnt()
 {

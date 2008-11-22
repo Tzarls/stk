@@ -33,6 +33,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <cmath>
+#include <cstring>
 
 FileRead :: FileRead()
   : fd_(0)

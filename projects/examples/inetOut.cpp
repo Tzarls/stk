@@ -17,6 +17,7 @@
 */
 /******************************************/
 
+#include <cstdlib>
 #include "FileWvIn.h"
 #include "InetWvOut.h"
 
