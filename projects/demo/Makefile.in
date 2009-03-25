@@ -51,13 +51,16 @@ ifeq ($(strip $(RAWWAVES)), )
 endif
 DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 
-%.o : $(SRC_PATH)/%.cpp
+%.o : $(SRC_PATH)/%.cpp Release
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
-%.o : ../../src/include/%.cpp
+%.o : ../../src/include/%.cpp Release
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
 all : $(PROGRAMS)
+
+Release :
+	mkdir Release
 
 demo: demo.cpp $(OBJECTS)
 	$(CC) $(CFLAGS) $(DEFS) -o demo demo.cpp $(OBJECT_PATH)/*.o $(LIBRARY)

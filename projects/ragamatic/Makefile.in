@@ -41,13 +41,16 @@ ifeq ($(strip $(RAWWAVES)), )
 endif
 DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 
-%.o : $(SRC_PATH)/%.cpp
+%.o : $(SRC_PATH)/%.cpp Release
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
-%.o : ../../src/include/%.cpp
+%.o : ../../src/include/%.cpp Release
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
 all : $(PROGRAMS)
+
+Release :
+	mkdir Release
 
 ragamat: ragamat.cpp $(OBJECTS)
 	$(CC) $(CFLAGS) $(DEFS) -o ragamat ragamat.cpp $(OBJECT_PATH)/*.o $(LIBRARY)
