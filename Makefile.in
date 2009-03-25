@@ -1,0 +1,8 @@
+
+.PHONY: all
+all:
+	$(MAKE) -C src
+	$(MAKE) -C projects/demo
+	$(MAKE) -C projects/examples
+	$(MAKE) -C projects/effects
+	$(MAKE) -C projects/ragamatic

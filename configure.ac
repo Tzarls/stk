@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 AC_INIT(STK, 4.3, gary@music.mcgill.ca, stk)
 AC_CONFIG_SRCDIR(src/Stk.cpp)
-AC_CONFIG_FILES(src/Makefile projects/demo/Makefile projects/effects/Makefile projects/ragamatic/Makefile projects/examples/Makefile projects/examples/libMakefile)
+AC_CONFIG_FILES(Makefile src/Makefile projects/demo/Makefile projects/effects/Makefile projects/ragamatic/Makefile projects/examples/Makefile projects/examples/libMakefile)
 
 # Fill GXX with something before test.
 AC_SUBST( GXX, ["no"] )
