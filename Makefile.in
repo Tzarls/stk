@@ -6,3 +6,11 @@ all:
 	$(MAKE) -C projects/examples
 	$(MAKE) -C projects/effects
 	$(MAKE) -C projects/ragamatic
+
+.PHONY: clean
+clean:
+	$(MAKE) clean -C src
+	$(MAKE) clean -C projects/demo
+	$(MAKE) clean -C projects/examples
+	$(MAKE) clean -C projects/effects
+	$(MAKE) clean -C projects/ragamatic
