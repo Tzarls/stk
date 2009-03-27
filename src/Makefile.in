@@ -62,7 +62,7 @@ DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 all : $(LIBRARY)
 
 Release/.placeholder :
-	mkdir Release
+	if ! [ -d Release ]; then mkdir Release; fi
 	touch Release/.placeholder
 
 $(LIBRARY) : $(OBJECTS)

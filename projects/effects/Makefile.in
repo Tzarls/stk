@@ -49,7 +49,7 @@ DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 all : $(PROGRAMS)
 
 Release/.placeholder :
-	mkdir Release
+	if ! [ -d Release ]; then mkdir Release; fi
 	touch Release/.placeholder
 
 effects: effects.cpp $(OBJECTS)
