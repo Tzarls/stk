@@ -21,6 +21,8 @@
 #include "FileWvIn.h"
 #include "InetWvOut.h"
 
+using namespace stk;
+
 void usage(void) {
   // Error function in case of incorrect command-line
   // argument specifications.
@@ -58,7 +60,7 @@ int main( int argc, char *argv[] )
   input.setRate( rate );
 
   // Find out how many channels we have.
-  int channels = input.getChannels();
+  int channels = input.channelsOut();
   StkFrames frames( 4096, channels );
 
   // Attempt to connect to the socket server.
@@ -72,7 +74,7 @@ int main( int argc, char *argv[] )
 
   // Here's the runtime loop
   while ( !input.isFinished() )
-    output.tickFrame( input.tickFrame( frames ) );
+    output.tick( input.tick( frames ) );
 
   return 0;
 }

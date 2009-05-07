@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "SineWave.h"
 #include "RtWvOut.h"
+using namespace stk;
 
 int main()
 {
@@ -10,6 +11,7 @@ int main()
   Stk::setSampleRate( 44100.0 );
   Stk::showWarnings( true );
 
+  int nFrames = 100000;
   SineWave sine;
   RtWvOut *dac = 0;
 
@@ -23,8 +25,19 @@ int main()
 
   sine.setFrequency( 441.0 );
 
-  // Play the oscillator for 40000 samples
-  for ( int i=0; i<40000; i++ ) {
+  // Option 1: Use StkFrames
+  /*
+  StkFrames frames( nFrames, 1 );
+  try {
+    dac->tick( sine.tick( frames ) );
+  }
+  catch ( StkError & ) {
+    goto cleanup;
+  }
+  */
+
+  // Option 2: Single-sample computations
+  for ( int i=0; i<nFrames; i++ ) {
     try {
       dac->tick( sine.tick() );
      }

@@ -11,13 +11,16 @@
     Tempo changes are internally tracked by the class and reflected in
     the values returned by the function getTickSeconds().
 
-    by Gary P. Scavone, 2003.
+    by Gary P. Scavone, 2003 - 2009.
 */
 /**********************************************************************/
 
 #include "MidiFileIn.h"
+#include <string.h>
 #include <iostream>
 #include <cstring>
+
+namespace stk {
 
 MidiFileIn :: MidiFileIn( std::string fileName )
 {
@@ -361,3 +364,5 @@ bool MidiFileIn :: readVariableLength( unsigned long *value )
 
   return true;
 } 
+
+} // stk namespace

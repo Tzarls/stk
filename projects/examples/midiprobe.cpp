@@ -6,6 +6,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <stdlib.h>
 #include "RtMidi.h"
 
 int main()

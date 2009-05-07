@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include "SineWave.h"
 #include "FileWvOut.h"
+using namespace stk;
 
 void usage(void) {
   // Error function in case of incorrect command-line
@@ -74,7 +75,7 @@ int main( int argc, char *argv[] )
   for ( i=0; i<channels; i++ )
     oscs[i]->tick( frames, i );
 
-  output.tickFrame( frames );
+  output.tick( frames );
 
  cleanup:
   for ( i=0; i<channels; i++ )

@@ -19,13 +19,15 @@
 
     See also SKINI.txt.
 
-    by Perry R. Cook and Gary P. Scavone, 1995 - 2007.
+    by Perry R. Cook and Gary P. Scavone, 1995 - 2009.
 */
 /***************************************************/
 
 #include "Skini.h"
 #include <cstdlib>
 #include "SKINI.tbl"
+
+namespace stk {
 
 Skini :: Skini()
 {
@@ -216,3 +218,5 @@ std::string Skini :: whatsThisController( long number )
   }
   return controller;
 }
+
+} // stk namespace
