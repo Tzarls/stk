@@ -232,6 +232,8 @@ bool FileRead :: getWavInfo( const char *fileName )
       dataType_ = STK_SINT8;
     else if (temp == 16)
       dataType_ = STK_SINT16;
+	else if (temp == 24)
+	  dataType_ = STK_SINT24;
     else if (temp == 32)
       dataType_ = STK_SINT32;
   }
@@ -711,17 +713,18 @@ void FileRead :: read( StkFrames& buffer, unsigned long startFrame, bool doNorma
     // no native 24-bit type.  The following routine works but is much
     // less efficient that that used for the other data types.
     SINT32 buf;
-    StkFloat gain = 1.0 / 8388608.0;
+    StkFloat gain = 1.0 / 2147483648.0; // must change this later so a gain value preset when file is loaded
     if ( fseek(fd_, dataOffset_+(offset*3), SEEK_SET ) == -1 ) goto error;
     for ( i=0; i<nSamples; i++ ) {
       if ( fread( &buf, 3, 1, fd_ ) != 1 ) goto error;
-      buf >>= 8;
       if ( byteswap_ )
         swap32( (unsigned char *) &buf );
+	  if (wavFile_)
+		buf <<= 8;
       if ( doNormalize )
         buffer[i] = buf * gain;
       else
-        buffer[i] = buf;
+        buffer[i] = buf / 256; // must change this to 1 / 256 for better performance
     }
   }
 
