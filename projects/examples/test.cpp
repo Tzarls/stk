@@ -1,9 +1,7 @@
 // sineosc.cpp STK tutorial program
 
-#include "FileLoop.h"
-#include "FileWvOut.h"
-#include <cstdlib>
-
+#include "FileWvIn.h"
+#include "RtWvOut.h"
 using namespace stk;
 
 int main()
@@ -12,27 +10,29 @@ int main()
   Stk::setSampleRate( 44100.0 );
 
   int nFrames = 100000;
-  FileLoop input;
-  FileWvOut output;
+  WvIn *input;
+  //  FileWvOut output;
+  WvOut *output;
 
   try {
     // Load the sine wave file.
-    input.openFile( "rawwaves/sinewave.raw", true );
+    input = new FileWvIn( "hellosine.wav" );
 
     // Open a 16-bit, one-channel WAV formatted output file
-    output.openFile( "hellosine.wav", 1, FileWrite::FILE_WAV, Stk::STK_SINT16 );
+    //   output = new FileWvOut( "hellosine.wav", 1, FileWrite::FILE_WAV, Stk::STK_SINT16 );
+    output = new RtWvOut();
   }
   catch ( StkError & ) {
     exit( 1 );
   }
 
-  input.setFrequency( 440.0 );
+  //input.setFrequency( 440.0 );
 
   // Option 1: Use StkFrames
   /*
   StkFrames frames( nFrames, 1 );
   try {
-    output.tick( input.tick( frames ) );
+    output->tick( input->tick( frames ) );
   }
   catch ( StkError & ) {
     exit( 1 );
@@ -42,12 +42,15 @@ int main()
   // Option 2: Single-sample computations
   for ( int i=0; i<nFrames; i++ ) {
     try {
-      output.tick( input.tick() );
+      output->tick( input->tick() );
     }
     catch ( StkError & ) {
       exit( 1 );
     }
   }
+
+  delete output;
+  delete input;
 
   return 0;
 }

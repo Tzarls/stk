@@ -15,7 +15,7 @@ namespace stk {
     Currently, WvOut is non-interpolating and the output rate is
     always Stk::sampleRate().
 
-    by Perry R. Cook and Gary P. Scavone, 1995 - 2009.
+    by Perry R. Cook and Gary P. Scavone, 1995 - 2010.
 */
 /***************************************************/
 
@@ -43,6 +43,9 @@ class WvOut : public Stk
     An StkError is thrown if an output error occurs.
   */
   virtual void tick( const StkFloat sample ) = 0;
+
+  //! Output the StkFrames data.
+  virtual void tick( const StkFrames& frames ) = 0;
 
  protected:
 

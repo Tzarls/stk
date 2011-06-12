@@ -12,7 +12,7 @@ namespace stk {
     This class provides common functionality for a variety of audio
     data input subclasses.
 
-    by Perry R. Cook and Gary P. Scavone, 1995 - 2009.
+    by Perry R. Cook and Gary P. Scavone, 1995 - 2010.
 */
 /***************************************************/
 
@@ -30,6 +30,9 @@ public:
 
   //! Compute one sample frame and return the specified \c channel value.
   virtual StkFloat tick( unsigned int channel = 0 ) = 0;
+
+  //! Fill the StkFrames argument with computed frames and return the same reference.
+  virtual StkFrames& tick( StkFrames& frames ) = 0;
 
 protected:
 

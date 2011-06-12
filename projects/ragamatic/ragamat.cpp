@@ -12,9 +12,11 @@
 
 #include <cstring>
 #include <signal.h>
-#include <string.h>
+#include <cstring>
 #include <iostream>
 #include <algorithm>
+#include <cstdlib>
+
 using std::min;
 using namespace stk;
 

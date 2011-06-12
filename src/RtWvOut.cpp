@@ -14,12 +14,12 @@
     that takes a reference to an StkFrames object for multi-channel
     and/or multi-frame data.
 
-    by Perry R. Cook and Gary P. Scavone, 1995 - 2009.
+    by Perry R. Cook and Gary P. Scavone, 1995 - 2010.
 */
 /***************************************************/
 
 #include "RtWvOut.h"
-#include <string.h>
+#include <cstring>
 
 namespace stk {
 
@@ -165,7 +165,7 @@ void RtWvOut :: tick( const StkFloat sample )
     writeIndex_ = 0;
 }
 
-void RtWvOut :: tick( StkFrames& frames )
+void RtWvOut :: tick( const StkFrames& frames )
 {
 #if defined(_STK_DEBUG_)
   if ( data_.channels() != frames.channels() ) {
@@ -195,7 +195,8 @@ void RtWvOut :: tick( StkFrames& frames )
       nFrames = frames.frames() - framesWritten;
     bytes = nFrames * nChannels * sizeof( StkFloat );
     StkFloat *samples = &data_[writeIndex_ * nChannels];
-    memcpy( samples, &frames[framesWritten * nChannels], bytes );
+    StkFrames *ins = (StkFrames *) &frames;
+    memcpy( samples, &(*ins)[framesWritten * nChannels], bytes );
     for ( unsigned int i=0; i<nFrames * nChannels; i++ ) clipTest( *samples++ );
 
     writeIndex_ += nFrames;
