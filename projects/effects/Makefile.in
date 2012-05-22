@@ -38,17 +38,13 @@ ifeq ($(strip $(RAWWAVES)), )
 endif
 DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 
-%.o : $(SRC_PATH)/%.cpp Release/.placeholder
+%.o : $(SRC_PATH)/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
-%.o : ../../src/include/%.cpp Release/.placeholder
+%.o : ../../src/include/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
 all : $(PROGRAMS)
-
-Release/.placeholder :
-	if ! [ -d Release ]; then mkdir Release; fi
-	touch Release/.placeholder
 
 effects: effects.cpp $(OBJECTS)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(DEFS) -o effects effects.cpp $(OBJECT_PATH)/*.o $(LIBRARY)

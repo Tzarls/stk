@@ -10,11 +10,11 @@ vpath %.o $(OBJECT_PATH)
 OBJECTS	=	Stk.o Noise.o Envelope.o ADSR.o \
 					Modulate.o SingWave.o SineWave.o FileRead.o FileWrite.o \
 					FileWvIn.o FileLoop.o FileWvOut.o \
-					OneZero.o OnePole.o PoleZero.o TwoZero.o \
+					OneZero.o OnePole.o PoleZero.o TwoZero.o Fir.o \
 					BiQuad.o FormSwep.o Delay.o DelayL.o DelayA.o \
 					ReedTable.o JetTable.o BowTable.o \
-					PRCRev.o \
-					Voicer.o Vector3D.o Sphere.o \
+					JCRev.o \
+					Voicer.o Vector3D.o Sphere.o Twang.o \
 					\
 					Clarinet.o BlowHole.o Saxofony.o Flute.o Brass.o BlowBotl.o \
 					Bowed.o Plucked.o StifKarp.o Sitar.o PluckTwo.o Mandolin.o Mesh2D.o \
@@ -49,17 +49,13 @@ ifeq ($(strip $(RAWWAVES)), )
 endif
 DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 
-%.o : $(SRC_PATH)/%.cpp Release/.placeholder
+%.o : $(SRC_PATH)/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
-%.o : ../../src/include/%.cpp Release/.placeholder
+%.o : ../../src/include/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
 all : $(PROGRAMS)
-
-Release/.placeholder :
-	if ! [ -d Release ]; then mkdir Release; fi
-	touch Release/.placeholder
 
 demo: demo.cpp $(OBJECTS)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(DEFS) -o demo demo.cpp $(OBJECT_PATH)/*.o $(LIBRARY)

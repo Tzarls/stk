@@ -30,7 +30,7 @@ LIBRARY = @LIBS@
 REALTIME = @realtime@
 ifeq ($(REALTIME),yes)
   PROGRAMS = ragamat
-	OBJECTS += RtMidi.o RtAudio.o RtWvOut.o Thread.o Mutex.o Socket.o TcpServer.o @objects@
+	OBJECTS += RtMidi.o RtAudio.o Thread.o Mutex.o Socket.o TcpServer.o @objects@
 endif
 
 RAWWAVES = @rawwaves@
@@ -39,23 +39,19 @@ ifeq ($(strip $(RAWWAVES)), )
 endif
 DEFS    += -DRAWWAVE_PATH=\"$(RAWWAVES)\"
 
-%.o : $(SRC_PATH)/%.cpp Release/.placeholder
+%.o : $(SRC_PATH)/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
-%.o : ../../src/include/%.cpp Release/.placeholder
+%.o : ../../src/include/%.cpp
 	$(CC) $(CFLAGS) $(DEFS) -c $(<) -o $(OBJECT_PATH)/$@
 
 all : $(PROGRAMS)
-
-Release/.placeholder :
-	if ! [ -d Release ]; then mkdir Release; fi
-	touch Release/.placeholder
 
 ragamat: ragamat.cpp $(OBJECTS)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(DEFS) -o ragamat ragamat.cpp $(OBJECT_PATH)/*.o $(LIBRARY)
 
 libragamat: ragamat.cpp Tabla.cpp Drone.cpp VoicDrum.cpp
-	$(CC) $(LDFLAGS) $(CFLAGS) $(DEFS) -o ragamat Tabla.cpp Drone.cpp VoicDrum.cpp ragamat.cpp -L../../src $(LIBRARY) -lstk
+	$(CC) $(LDFLAGS) $(CFLAGS) $(DEFS) -o ragamat Tabla.cpp Drone.cpp VoicDrum.cpp ragamat.cpp -L../../src -lstk $(LIBRARY)
 
 $(OBJECTS) : Stk.h
 
