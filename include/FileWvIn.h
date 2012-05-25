@@ -56,6 +56,9 @@ public:
   //! Class destructor.
   ~FileWvIn( void );
 
+  //! Open the specified file and load it fully into memory - no chunking.
+  void loadFile( std::string fileName, bool raw = false, bool doNormalize = true );
+
   //! Open the specified file and load its data.
   /*!
     Data from a previously opened file will be overwritten by this
@@ -170,6 +173,7 @@ protected:
   bool interpolate_;
   bool normalizing_;
   bool chunking_;
+  bool loadFullFile_;
   StkFloat time_;
   StkFloat rate_;
   unsigned long chunkThreshold_;

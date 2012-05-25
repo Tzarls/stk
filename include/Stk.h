@@ -527,6 +527,12 @@ const StkFloat PI           = 3.14159265358979;
 const StkFloat TWO_PI       = 2 * PI;
 const StkFloat ONE_OVER_128 = 0.0078125;
 
+const StkFloat SINT16_NORM_FACTOR	= 1.0 / 32768.0;
+const StkFloat SINT32_NORM_FACTOR	= 1.0 / 2147483648.0;
+const StkFloat SINT8_NORM_FACTOR	= 1.0 / 128.0;
+const StkFloat SINT24_NORM_FACTOR	= 1.0 / 2147483648.0;
+const StkFloat SINT24_RSHIFT_FACTOR	= 1.0 / 256.0;
+
 #if defined(__WINDOWS_DS__) || defined(__WINDOWS_ASIO__) || defined(__WINDOWS_MM__)
   #define __OS_WINDOWS__
   #define __STK_REALTIME__
