@@ -69,7 +69,7 @@ void TapDelay :: setTapDelays( std::vector<unsigned long> taps )
     }
 
     if ( taps[i] < 0 ) {
-      error << "TapDelay::setDelay: argument (" << taps[i] << ") less than zero!\n";
+      oStream_ << "TapDelay::setDelay: argument (" << taps[i] << ") less than zero!\n";
       handleError( StkError::WARNING ); return;
     }
   }
