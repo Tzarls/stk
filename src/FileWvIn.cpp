@@ -37,7 +37,7 @@
 namespace stk {
 
 FileWvIn :: FileWvIn( unsigned long chunkThreshold, unsigned long chunkSize )
-  : loadFullFile_(false), finished_(true), interpolate_(false), time_(0.0), rate_(0.0),
+  : finished_(true), interpolate_(false), time_(0.0), rate_(0.0),
     chunkThreshold_(chunkThreshold), chunkSize_(chunkSize)
 {
   Stk::addSampleRateAlert( this );
@@ -45,7 +45,7 @@ FileWvIn :: FileWvIn( unsigned long chunkThreshold, unsigned long chunkSize )
 
 FileWvIn :: FileWvIn( std::string fileName, bool raw, bool doNormalize,
                       unsigned long chunkThreshold, unsigned long chunkSize )
-  : loadFullFile_(false),finished_(true), interpolate_(false), time_(0.0), rate_(0.0),
+  : finished_(true), interpolate_(false), time_(0.0), rate_(0.0),
     chunkThreshold_(chunkThreshold), chunkSize_(chunkSize)
 {
   openFile( fileName, raw, doNormalize );
@@ -71,28 +71,16 @@ void FileWvIn :: closeFile( void )
   lastFrame_.resize( 0, 0 );
 }
 
-void FileWvIn :: loadFile( std::string fileName, bool raw, bool doNormalize )
-{
-	loadFullFile_ = true;
-	openFile(fileName, raw, doNormalize);
-}
-
-void FileWvIn :: openFile( std::string fileName, bool raw, bool doNormalize )
+void FileWvIn :: openFile( std::string fileName, bool raw, bool doNormalize, bool allowChunking )
 {
   // Call close() in case another file is already open.
   this->closeFile();
-
-  // Store the value of loadFullFile_ in a local variable and set loadFullFile_ = false.
-  // We do it this way to ensure loadFullFile_ is set to false when the function returns,
-  // even if an exception is thrown.
-  bool localLoadFullFile = loadFullFile_;
-  loadFullFile_ = false;
 
   // Attempt to open the file ... an error might be thrown here.
   file_.open( fileName, raw );
 
   // Determine whether chunking or not.
-  if ( !localLoadFullFile && file_.fileSize() > chunkThreshold_ ) {
+  if ( file_.fileSize() > chunkThreshold_ && allowChunking ) {
     chunking_ = true;
     chunkPointer_ = 0;
     data_.resize( chunkSize_, file_.channels() );

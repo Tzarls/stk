@@ -56,20 +56,19 @@ public:
   //! Class destructor.
   ~FileWvIn( void );
 
-  //! Open the specified file and load it fully into memory - no chunking.
-  void loadFile( std::string fileName, bool raw = false, bool doNormalize = true );
-
   //! Open the specified file and load its data.
   /*!
     Data from a previously opened file will be overwritten by this
     function.  An StkError will be thrown if the file is not found,
-    its format is unknown, or a read error occurs.  If the file data
-    is to be loaded incrementally from disk and normalization is
-    specified, a scaling will be applied with respect to fixed-point
-    limits.  If the data format is floating-point, no scaling is
-    performed.
+    its format is unknown, or a read error occurs.  The file data will
+    be read incrementally from disk if its size is greater than the
+    chunkThreshold specified in the constructor and \c allowChunking
+    is true.  If the file data is to be loaded incrementally from disk
+    and normalization is specified, a scaling will be applied with
+    respect to fixed-point limits.  If the data format is
+    floating-point, no scaling is performed.
   */
-  virtual void openFile( std::string fileName, bool raw = false, bool doNormalize = true );
+  virtual void openFile( std::string fileName, bool raw = false, bool doNormalize = true, bool allowChunking = true );
 
   //! Close a file if one is open.
   virtual void closeFile( void );
@@ -173,7 +172,6 @@ protected:
   bool interpolate_;
   bool normalizing_;
   bool chunking_;
-  bool loadFullFile_;
   StkFloat time_;
   StkFloat rate_;
   unsigned long chunkThreshold_;

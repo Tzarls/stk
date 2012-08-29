@@ -40,6 +40,11 @@
 
 namespace stk {
 
+const StkFloat SINT8_NORM_FACTOR  = 1.0 / 128.0;
+const StkFloat SINT16_NORM_FACTOR  = 1.0 / 32768.0;
+const StkFloat SINT24_NORM_FACTOR  = 1.0 / 2147483648.0;
+const StkFloat SINT32_NORM_FACTOR  = 1.0 / 2147483648.0;
+
 FileRead :: FileRead()
   : fd_(0), fileSize_(0), channels_(0), dataType_(0), fileRate_(0.0)
 {
@@ -835,9 +840,9 @@ void FileRead :: read( StkFrames& buffer, unsigned long startFrame, bool doNorma
     // 24-bit values are harder to import efficiently since there is
     // no native 24-bit type.  The following routine works but is much
     // less efficient than that used for the other data types.
-    if ( fseek(fd_, dataOffset_+(offset*3), SEEK_SET ) == -1 ) goto error;
-	SINT32 temp;
+    SINT32 temp;
     unsigned char *ptr = (unsigned char *) &temp;
+    if ( fseek(fd_, dataOffset_+(offset*3), SEEK_SET ) == -1 ) goto error;
     for ( i=0; i<nSamples; i++ ) {
 #ifdef __LITTLE_ENDIAN__
       if ( byteswap_ ) {
@@ -862,10 +867,10 @@ void FileRead :: read( StkFrames& buffer, unsigned long startFrame, bool doNorma
 #endif
 
       if ( doNormalize ) {
-        buffer[i] = (StkFloat) temp * SINT24_NORM_FACTOR;
+        buffer[i] = (StkFloat) temp * SINT32_NORM_FACTOR; // "factor" also  includes 1 / 256 factor.
       }
       else
-        buffer[i] = (StkFloat) temp * SINT24_RSHIFT_FACTOR;  // right shift without affecting the sign bit
+        buffer[i] = (StkFloat) temp / 256;  // right shift without affecting the sign bit
     }
   }
 
